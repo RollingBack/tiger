@@ -5,18 +5,27 @@
     <link rel="stylesheet" type="text/css" href="{% static "page/css/login.css" %}">
 {% endblock %}
 {% block nav %}{% endblock %}
-{% block content %}
-    <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+{% block side_bar %}
+    {% block content %}
+        {% if wrong_password %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>警告</strong>用户名或者密码错误！
+            </div>
+        {% endif %}
+    <form class="form-signin" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">请登录</h2>
+        <label for="inputEmail" class="sr-only">用户名</label>
+        <input type="text" id="inputUserName" class="form-control" name="user_name" placeholder="用户名" required autofocus>
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="密码" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       </form>
+    {% endblock %}
 {% endblock %}

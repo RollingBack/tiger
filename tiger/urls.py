@@ -19,7 +19,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name='index'),
-    url(r'^sign-in/', views.sign_in, name='login'),
+    url(r'^sign-in', views.sign_in, name='login'),
     url(r'^console/', views.console, name='console'),
     url(r'^admin/', admin.site.urls),
+    url(r'^logout', views.log_out, name='logout')
 ]
