@@ -27,6 +27,8 @@ def sign_in(request):
             user = authenticate(username=user_name, password=password)
             if user is not None and user.is_active:
                 login(request, user)
+                if request.POST.get('next') != '':
+                    return HttpResponseRedirect(request.POST.get('next'))
                 return HttpResponseRedirect('/')
         return render(request, 'tiger/login.html', {'wrong_password': True})
     return render(request, 'tiger/login.html')
