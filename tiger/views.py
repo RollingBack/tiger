@@ -11,7 +11,7 @@ from .forms import LoginForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import  login_required
-from django.template.context import RequestContext
+
 
 @login_required(login_url='/sign-in')
 def home(request):
@@ -32,6 +32,7 @@ def sign_in(request):
                 return HttpResponseRedirect('/')
         return render(request, 'tiger/login.html', {'wrong_password': True})
     return render(request, 'tiger/login.html')
+
 
 @login_required(login_url='/sign-in')
 def console(request):
